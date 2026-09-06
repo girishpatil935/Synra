@@ -10,7 +10,7 @@
 
 **SYNRA Studios** is a digital agency focused on helping businesses establish and grow their digital presence.
 
-We combine **technology, strategy, design, SEO, digital marketing, social media, and automation** to create digital systems that don't just look good — they work.
+We combine **technology, strategy, design, SEO, digital marketing, social media, and automation** to create digital systems that don't just look good, they work.
 
 From launching a new business website to improving search visibility and managing digital growth, SYNRA Studios works as a long-term digital partner for businesses.
 
