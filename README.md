@@ -2,7 +2,7 @@
 
 ### Synergy. Strategy. Results.
 
-> A digital growth studio helping businesses build, grow, and scale their presence online.
+> A digital growth studio helping businesses build, grow, and scale their presence online to make a reasonable Profit .
 
 ---
 
