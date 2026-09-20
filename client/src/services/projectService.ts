@@ -1,3 +1,11 @@
+import axios from "axios";
+const API_URL = import.meta.env.VITE_API_URL;
+// =========================================================
+// Project Inquiry Data
+// =========================================================
+// This represents the data collected by the React form.
+// =========================================================
+
 export interface ProjectInquiryData {
   // Step 01: About You
   fullName: string;
@@ -26,6 +34,11 @@ export interface ProjectInquiryData {
   preferredTime?: string;
 }
 
+
+// =========================================================
+// Response returned to the React application
+// =========================================================
+
 export interface SubmissionResponse {
   success: boolean;
   message: string;
@@ -33,29 +46,62 @@ export interface SubmissionResponse {
   timestamp: string;
 }
 
-/**
- * Submit a project inquiry.
- * Ready for future backend, API, CRM, WhatsApp, and email notification integrations.
- */
+
+// =========================================================
+// FastAPI response format
+// =========================================================
+// This matches what our Python backend currently returns:
+//
+// {
+//   "message": "...",
+//   "reference_id": "SYN-XXXXXX"
+// }
+// =========================================================
+
+interface BackendInquiryResponse {
+  message: string;
+  reference_id: string;
+}
+
+
+// =========================================================
+// Submit Project Inquiry
+// =========================================================
+//
+// React Form
+//     ↓
+// Axios
+//     ↓
+// FastAPI
+//     ↓
+// PostgreSQL
+//
+// =========================================================
+
 export async function submitProjectInquiry(
   data: ProjectInquiryData
 ): Promise<SubmissionResponse> {
-  // Mock submission delay to emulate robust network transaction
-  await new Promise((resolve) => setTimeout(resolve, 900));
 
-  const referenceId = `SYN-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+  // Send the form data to our FastAPI backend
+  const response = await axios.post<BackendInquiryResponse>(
+    `${API_URL}/api/inquiries`,
+    data
+  );
 
-  // In production, this can call `/api/inquiries`, email webhook, or Zapier/CRM
-  console.info("[SYNRA Project Inquiry Submitted]", {
-    referenceId,
-    timestamp: new Date().toISOString(),
-    inquiry: data,
-  });
 
+  // Get the response from FastAPI
+  const backendData = response.data;
+
+
+  // Convert the backend response into the format
+  // expected by the existing React application.
   return {
     success: true,
-    message: "Project inquiry received successfully.",
-    referenceId,
+
+    message: backendData.message,
+
+    referenceId: backendData.reference_id,
+
     timestamp: new Date().toISOString(),
   };
 }

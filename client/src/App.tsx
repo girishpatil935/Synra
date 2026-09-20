@@ -1,3 +1,5 @@
+import AdminInquiries from "./pages/AdminInquiries";
+import AdminLogin from "./pages/AdminLogin";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -5,12 +7,18 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function Router() {
   return (
     <Switch>
+      <Route path={"/admin/login"} component={AdminLogin} />
       <Route path={"/"} component={Home} />
+      <Route path={"/admin/inquiries"}>
+        <ProtectedRoute>
+          <AdminInquiries />
+        </ProtectedRoute>
+      </Route>
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />

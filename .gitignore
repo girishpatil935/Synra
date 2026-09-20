@@ -1,6 +1,7 @@
 # Dependencies
 **/node_modules
 .pnpm-store/
+backend/venv/
 
 # Build outputs
 dist/
@@ -111,3 +112,10 @@ temp/
 # Manus version file (auto-generated, not part of source)
 client/public/__manus__/version.json
 .project-config.json
+
+# Environment variables
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
